@@ -144,19 +144,18 @@ console.log(` For learner_id: 125. Scores gotten` )
 console.log(Ass1_Student125_score);
 console.log(Ass2_Student125_score);
 console.log(Ass3_Student125_score);
+student125_Avr = (((Ass1_Student125_score/50)+(Ass2_Student125_score/150)+(Ass3_Student125_score/500))*100);
+console.log(`learner_id: 125; Average:  ${student125_Avr} %`);
 
 console.log(` For learner_id: 132. Scores gotten` )
 console.log(Ass1_Student132_score);
 console.log(Ass2_Student132_score);
+student132_Avr = (((Ass1_Student132_score/50)+(Ass2_Student132_score/150))*100);
+console.log(`learner_id: 132; Average:  ${student132_Avr} %`);
 
 
-//output= (array of objects each containing Id, avg and assignment-number)
-     student125_Avr = (((Ass1_Student125_score/50)+(Ass2_Student125_score/150)+(Ass3_Student125_score/500))*100);
-    //console.log(`learner_id: 125; Average:  ${student125_Avr} %`);
 
-    student132_Avr = (((Ass1_Student132_score/50)+(Ass2_Student132_score/150))*100);
-  // console.log(`learner_id: 132; Average:  ${student132_Avr} %`);
-     
+     //output= (array of objects each containing Id, avg and assignment-number)
   console.log(`.......................................................................................`)
 
    function getLearnerData(id, average, sub1, sub2, sub3){
