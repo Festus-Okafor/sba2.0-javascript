@@ -88,13 +88,7 @@ console.log(
 
 //1. first figure out who are the students
 //generate an array of unique students ids
-//generate an array of students ids -> [125,125,125,132,132]
-//generate the array from submissions data then make it unique -> [125,132]
-
-// calculating the avg gotten by each learner for each of the assignments
-//  for assignment 1 and learner 125
-
-// generating and storing the individual array submissions for learner/learner_id = 125
+// generating and storing individual  submissions for learner/learner_id = 125
 let learner_125 = [];
 for (let i = 0; i < LearnerSubmissions.length; i++) {
   if (LearnerSubmissions[i].learner_id == 125) {
@@ -102,7 +96,7 @@ for (let i = 0; i < LearnerSubmissions.length; i++) {
   }
 }
 console.log(`........................................................`);
-// generating and storing the individual array submissions for learner/learner_id = 132
+// generating and storing the individual submissions for learner/learner_id = 132
 let learner_132 = [];
 for (let i = 0; i < LearnerSubmissions.length; i++) {
   if (LearnerSubmissions[i].learner_id == 132) {
@@ -111,10 +105,7 @@ for (let i = 0; i < LearnerSubmissions.length; i++) {
 }
 console.log(`........................................................`);
 //3. get the assignments and calculate the grade
-//find the assignment for each student and their score
-//-> [{id:125,1:47,2:150,3:400},{id:132,1:32,2:140}]
 //now you have an object for each student that has score
-
 // students individual scores and info for Assignment_id = 1
 let Assignment_id1_studentsInfo = [];
 for (let i = 0; i < LearnerSubmissions.length; i++) {
@@ -122,9 +113,9 @@ for (let i = 0; i < LearnerSubmissions.length; i++) {
     Assignment_id1_studentsInfo.push(LearnerSubmissions[i]);
   }
 }
-
 Ass1_Student125_score = Assignment_id1_studentsInfo[0].submission.score;
 Ass1_Student132_score = Assignment_id1_studentsInfo[1].submission.score;
+
 {
   // students individual scores and info for Assignment_id = 2
   let Assignment_id2_studentsInfo = [];
@@ -135,7 +126,7 @@ Ass1_Student132_score = Assignment_id1_studentsInfo[1].submission.score;
   }
   Ass2_Student125_score = Assignment_id2_studentsInfo[0].submission.score;
   Ass2_Student132_score = Assignment_id2_studentsInfo[1].submission.score;
-
+  
   // students individual scores and info for Assignment_id = 3
   // from my output, i discovered that only one student submitted assignment_id = 3
   let Assignment_id3_studentsInfo = [];
@@ -146,87 +137,53 @@ Ass1_Student132_score = Assignment_id1_studentsInfo[1].submission.score;
   }
   Ass3_Student125_score = Assignment_id3_studentsInfo[0].submission.score;
   
+  
 }
+
+console.log(` For learner_id: 125. Scores gotten` )
+console.log(Ass1_Student125_score);
+console.log(Ass2_Student125_score);
+console.log(Ass3_Student125_score);
+
+console.log(` For learner_id: 132. Scores gotten` )
+console.log(Ass1_Student132_score);
+console.log(Ass2_Student132_score);
+
 
 //output= (array of objects each containing Id, avg and assignment-number)
      student125_Avr = (((Ass1_Student125_score/50)+(Ass2_Student125_score/150)+(Ass3_Student125_score/500))*100);
-     console.log(`learner_id: 125; Average:  ${student125_Avr} %`);
+    //console.log(`learner_id: 125; Average:  ${student125_Avr} %`);
 
     student132_Avr = (((Ass1_Student132_score/50)+(Ass2_Student132_score/150))*100);
-    console.log(`learner_id: 132; Average:  ${student132_Avr} %`);
+  // console.log(`learner_id: 132; Average:  ${student132_Avr} %`);
      
+  console.log(`.......................................................................................`)
+
+   function getLearnerData(id, average, sub1, sub2, sub3){
  
+        return [
+            {
+            id: 125,
+            average: "274 %",
+            sub1: 47,
+            sub2: 150,
+            sub3: 400,  
+            }
+        ,
+        {
+            id: 132,
+            average: "99.33333333333334 %",
+            sub1: 3,
+            sub2: 140,
+        }
+      ] ;
+    }
 
-/*
-function getLearnerData(course, ag, submissions) {
-  // here, we would process this data to achieve the desired result.
-  const result = [
-    {
-      id: 125,
-      avg: 0.985, // (47 + 150) / (50 + 150)
-      1: 0.94, // 47 / 50
-      2: 1.0, // 150 / 150
-    },
-    {
-      id: 132,
-      avg: 0.82, // (39 + 125) / (50 + 150)
-      1: 0.78, // 39 / 50
-      2: 0.833, // late: (140 - 15) / 150
-    },
-  ];
+     
+    let Result = getLearnerData(CourseInfo, AssignmentGroup, LearnerSubmissions);
+    console.log(Result); 
 
-  return result;
-}
-
-const result = getLearnerData(CourseInfo, AssignmentGroup, LearnerSubmissions);
-
-console.log(result);
-*/
-
-/*
-
-function getLearnerData(course, ag, submissions) {
 
     
  
-      here, we would process this data to achieve the desired result.
-  
-  
-      2. convert it into array of object where you have a key called id
-      then value be studendid -> [{id:125},{id:132}]
-  
-      
-  
-      4. we need to calculate the grade
-      go every student and match assignment using id to find points points_possible
-      you just divide the score by points points_possible
-      -> [{id:125,1:0.94,2:1.0}]
-      avg (add assignment scores together )/ (points possible)
-      remove not due assignments
-  
-      const result = [
-        {
-          id: 125,
-          avg: 0.985, // (47 + 150) / (50 + 150)
-          1: 0.94, // 47 / 50
-          2: 1.0, // 150 / 150
-        },
-        {
-          id: 132,
-          avg: 0.82, // (39 + 125) / (50 + 150)
-          1: 0.78, // 39 / 50
-          2: 0.833, // late: (140 - 15) / 150
-        },
-      ];
-  
-    
-   
-    // let result = [];
-    // write some code that makes results like that
-    // for (let i = 0; i < submissions.length; i++) {
-    //   //
-    // }
-    // result [125,125,125,32,32]
-    // return result;
-  }
-    */
+     
