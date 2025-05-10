@@ -32,6 +32,7 @@ const AssignmentGroup = {
   ],
 };
 
+   
 // The provided learner submission data.
 const LearnerSubmissions = [
   {
@@ -76,91 +77,85 @@ const LearnerSubmissions = [
   },
 ];
 
-
 function courserId(id, name) {
-    return { course_id: 451, name: "Introduction to JavaScript" };
+  return { course_id: 451, name: "Introduction to JavaScript" };
+}
+let course = courserId(451, "Introduction to Javascript");
+console.log(course);
+console.log(
+  `course Details: \n id: 12345,\n name: "Fundamentals of JavaScript",\n course_id: 451,\n group_weight: 25, `
+);
+
+//1. first figure out who are the students
+//generate an array of unique students ids
+//generate an array of students ids -> [125,125,125,132,132]
+//generate the array from submissions data then make it unique -> [125,132]
+
+// calculating the avg gotten by each learner for each of the assignments
+//  for assignment 1 and learner 125
+
+// generating and storing the individual array submissions for learner/learner_id = 125
+let learner_125 = [];
+for (let i = 0; i < LearnerSubmissions.length; i++) {
+  if (LearnerSubmissions[i].learner_id == 125) {
+    learner_125.push(LearnerSubmissions[i]);
   }
-  let course = courserId(451, "Introduction to Javascript");
-  console.log(course);
-
-  //1. first figure out who are the students
-  //generate an array of unique students ids
-  //generate an array of students ids -> [125,125,125,132,132]
-  //generate the array from submissions data then make it unique -> [125,132]
-  
-  // calculating the avg gotten by each learner for each of the assignments
-  //  for assignment 1 and learner 125
-  
-  console.log(
-    `course Details: \n id: 12345,\n name: "Fundamentals of JavaScript",\n course_id: 451,\n group_weight: 25, `
-  );
-// generating and storing the individual array submissions for learner/learner_id = 125 
- let learner_125 = [];
- for (let i=0; i< LearnerSubmissions.length; i++ ){
-     if(LearnerSubmissions[i].learner_id == 125){
-     learner_125.push(LearnerSubmissions[i]);
-     }   
- }
- console.log(learner_125);
-
-
-console.log(`........................................................`)
+}
+console.log(`........................................................`);
 // generating and storing the individual array submissions for learner/learner_id = 132
 let learner_132 = [];
- for (let i=0; i< LearnerSubmissions.length; i++ ){
-     if(LearnerSubmissions[i].learner_id == 132){
-     learner_132.push(LearnerSubmissions[i]);
-     }   
- }
- console.log(learner_132);
-
- console.log(`........................................................`)
- //3. get the assignments and calculate the grade
- //find the assignment for each student and their score
- //-> [{id:125,1:47,2:150,3:400},{id:132,1:32,2:140}]
- //now you have an object for each student that has score
+for (let i = 0; i < LearnerSubmissions.length; i++) {
+  if (LearnerSubmissions[i].learner_id == 132) {
+    learner_132.push(LearnerSubmissions[i]);
+  }
+}
+console.log(`........................................................`);
+//3. get the assignments and calculate the grade
+//find the assignment for each student and their score
+//-> [{id:125,1:47,2:150,3:400},{id:132,1:32,2:140}]
+//now you have an object for each student that has score
 
 // students individual scores and info for Assignment_id = 1
 let Assignment_id1_studentsInfo = [];
- for (let i=0; i< LearnerSubmissions.length; i++ ){
-     if(LearnerSubmissions[i].assignment_id ==1){
-        Assignment_id1_studentsInfo.push(LearnerSubmissions[i]);
-     }   
- }
-
- console.log(Assignment_id1_studentsInfo); 
- 
- 
- {
-// students individual scores and info for Assignment_id = 2
- let Assignment_id2_studentsInfo = [];
- for (let i=0; i< LearnerSubmissions.length; i++ ){
-     if(LearnerSubmissions[i].assignment_id ==2){
-        Assignment_id2_studentsInfo.push(LearnerSubmissions[i]);
-     }   
- }
- console.log(Assignment_id2_studentsInfo);  
-
-
+for (let i = 0; i < LearnerSubmissions.length; i++) {
+  if (LearnerSubmissions[i].assignment_id == 1) {
+    Assignment_id1_studentsInfo.push(LearnerSubmissions[i]);
+  }
 }
-// students individual scores and info for Assignment_id = 3
-// from my output, i discovered that only one student submitted assignment_id = 3
-let Assignment_id3_studentsInfo = [];
- for (let i=0; i< LearnerSubmissions.length; i++ ){
-     if(LearnerSubmissions[i].assignment_id ==3){
-        Assignment_id3_studentsInfo.push(LearnerSubmissions[i]);
-     }   
- }
- console.log(Assignment_id3_studentsInfo); 
+
+Ass1_Student125_score = Assignment_id1_studentsInfo[0].submission.score;
+Ass1_Student132_score = Assignment_id1_studentsInfo[1].submission.score;
+{
+  // students individual scores and info for Assignment_id = 2
+  let Assignment_id2_studentsInfo = [];
+  for (let i = 0; i < LearnerSubmissions.length; i++) {
+    if (LearnerSubmissions[i].assignment_id == 2) {
+      Assignment_id2_studentsInfo.push(LearnerSubmissions[i]);
+    }
+  }
+  Ass2_Student125_score = Assignment_id2_studentsInfo[0].submission.score;
+  Ass2_Student132_score = Assignment_id2_studentsInfo[1].submission.score;
+
+  // students individual scores and info for Assignment_id = 3
+  // from my output, i discovered that only one student submitted assignment_id = 3
+  let Assignment_id3_studentsInfo = [];
+  for (let i = 0; i < LearnerSubmissions.length; i++) {
+    if (LearnerSubmissions[i].assignment_id == 3) {
+      Assignment_id3_studentsInfo.push(LearnerSubmissions[i]);
+    }
+  }
+  Ass3_Student125_score = Assignment_id3_studentsInfo[0].submission.score;
+  
+}
 
 //output= (array of objects each containing Id, avg and assignment-number)
-// avg =() total gotten ass1 + total gotten ass2 / total max supposed score) x 100%(in percentage)
+     student125_Avr = (((Ass1_Student125_score/50)+(Ass2_Student125_score/150)+(Ass3_Student125_score/500))*100);
+     console.log(`learner_id: 125; Average:  ${student125_Avr} %`);
 
-
-
-
-
-
+    student132_Avr = (((Ass1_Student132_score/50)+(Ass2_Student132_score/150))*100);
+    console.log(`learner_id: 132; Average:  ${student132_Avr} %`);
+     
+ 
 
 /*
 function getLearnerData(course, ag, submissions) {
@@ -187,12 +182,6 @@ const result = getLearnerData(CourseInfo, AssignmentGroup, LearnerSubmissions);
 
 console.log(result);
 */
-
-
-
-
-
-
 
 /*
 
